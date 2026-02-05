@@ -2,6 +2,7 @@ package simple_connection
 
 import (
 	"context"
+	"os"
 
 	"github.com/jackc/pgx/v5"
 )
@@ -9,5 +10,6 @@ import (
 // "postgres://YourUserName:YourPassword@YourHostName:5432/YourDatabaseName"
 
 func CreateConnection(ctx context.Context) (*pgx.Conn, error) {
-	return pgx.Connect(ctx, "postgres://postgres:bashir@localhost:5432/postgres")
+	connString := os.Getenv("CONN_STRING")
+	return pgx.Connect(ctx, connString)
 }
